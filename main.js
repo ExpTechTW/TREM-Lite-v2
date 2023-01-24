@@ -92,7 +92,7 @@ function trayIcon() {
 	});
 	const contextMenu = Menu.buildFromTemplate([
 		{
-			label : `TREM v${TREM.getVersion()}`,
+			label : `TREM v${TREM.getVersion()} 官方網站`,
 			type  : "normal",
 			click : () => {
 				shell.openExternal("https://github.com/ExpTechTW/TREM");
@@ -100,6 +100,13 @@ function trayIcon() {
 		},
 		{
 			type: "separator",
+		},
+		{
+			label : "顯示app",
+			type  : "normal",
+			click : () => {
+				MainWindow.show();
+			}
 		},
 		{
 			label : "重新啟動",
