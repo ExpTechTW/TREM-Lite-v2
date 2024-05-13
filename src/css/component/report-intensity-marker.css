@@ -1,0 +1,20 @@
+.report-intensity-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  outline: 1.6px solid #fff;
+  font-weight: 700;
+  opacity: 1;
+  transition: opacity .2s cubic-bezier(0.2, 0, 0, 1);
+
+  &.collapsed {
+    opacity: .4;
+    pointer-events: none;
+  }
+}
+
+body:has(#report-intensity-sort-intensity:checked) .report-intensity-marker.collapsed {
+  opacity: 1;
+  pointer-events: all;
+}

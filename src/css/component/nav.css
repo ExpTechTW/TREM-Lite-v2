@@ -1,0 +1,64 @@
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 9999999;
+
+  > .nav-item {
+    display: flex;
+  }
+}
+
+.nav-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  padding-right: 16px;
+  border-radius: 32px;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  overflow: hidden;
+  height: 24px;
+  white-space: nowrap;
+  flex: 16px 0;
+  opacity: .6;
+  transition: flex .2s cubic-bezier(0.2, 0, 0, 1),
+              opacity .2s cubic-bezier(0.2, 0, 0, 1);
+
+  > .nav-item-icon {
+    height: 24px;
+    aspect-ratio: 1;
+    font-size: 24px;
+  }
+
+  > .nav-item-label {
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity .1s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.active,
+  &:hover {
+    flex: 1;
+      
+    > .nav-item-label {
+      opacity: 1;
+    }
+  }
+  cursor: pointer;
+}

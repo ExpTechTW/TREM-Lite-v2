@@ -1,0 +1,9 @@
+.report-marker {
+  opacity: 1;
+  transition: opacity .2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+body:has(#report-box.show) .report-marker {
+  opacity: 0;
+  pointer-events: none;
+}

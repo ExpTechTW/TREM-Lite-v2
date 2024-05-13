@@ -1,0 +1,284 @@
+<html lang="zh-Hant">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <link href="../node_modules/@material-symbols/font-400/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/font.css" />
+    <link rel="stylesheet" href="../css/intensity.css" />
+    <link rel="stylesheet" href="../css/leaflet.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/pga.css" />
+</head>
+
+<body>
+    <div class="tos">
+        <div style="font-size: 64px;font-weight: 700;">TOS 服務條款</div>
+    </div>
+
+    <nav class="nav-bar">
+      <div class="nav-item">
+        <button id="nav-home" class="nav-btn" type="button" data-panel="home">
+          <span class="nav-item-icon material-symbols-rounded">home</span>
+          <span class="nav-item-label">主頁</span>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button id="nav-report-panel" class="nav-btn" type="button" data-panel="report">
+          <span class="nav-item-icon material-symbols-rounded">earthquake</span>
+          <span class="nav-item-label">地震報告</span>
+        </div>
+      <div class="nav-item">
+        <button id="nav-test-eew-panel" class="nav-btn" type="button" data-panel="test-eew">
+          <span class="nav-item-icon material-symbols-rounded">cruelty_free</span>
+          <span class="nav-item-label">測試EEW</span>
+        </div>
+      <div class="nav-item">
+        <button id="nav-setting-panel" class="nav-btn" type="button" data-panel="setting">
+          <span class="nav-item-icon material-symbols-rounded">Settings</span>
+          <span class="nav-item-label">設定</span>
+        </div>
+      </div>
+    </nav>
+
+    <div id="map" class="map"></div>
+	
+	<div id="info-box" class="info-box">
+		<div class="info-title-box">
+			<div class="info-title-box-type" id="info-title-box-type">目前沒有地震速報</div>
+			<div class="info-title-box-value" id="info-no"></div>
+		</div>
+		<div class="info-body-box">
+			<div class="info-body-title-box">
+				<div class="info-body-title-title-box" id="info-intensity"></div>
+				<div class="info-body-title-body-box">
+					<div class="info-body-location-text" id="info-loc"></div>
+					<div class="info-body-eq-box">
+						<div class="info-body-magnitude magnitude-6" data-background-text="規模">
+							<div class="info-body-magnitude-value" id="info-mag"></div>
+						</div>
+						<div class="info-body-depth depth-deep" data-background-text="深度">
+							<div class="info-body-depth-value" id="info-depth"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="info-body-footer">
+				<div class="info-body-footer-title">預估最大震度</div>
+				<div class="info-body-footer-value-container">
+					<span class="info-body-footer-value-time" id="info-time"></span>
+					<span class="info-body-footer-value-name">發震</span>
+				</div>
+			</div>
+			<div class="cancel-box">
+				<div class="cancel-title"><span>取</span><span>消</span></div>
+				<div class="cancel-body">此地震速報已取消</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="intensity-container">
+		<div class="report-box">
+		  <div class="report-container">
+			  <div class="report-header">地震報告</div>
+              <div class="report-list">
+                  <div class="report-item">
+                      <div class="report-intensity intensity-9">7</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-8">6⁺</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-7">6⁻</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-6">5⁺</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-5">5⁻</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-4">4</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-3">3</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-2">2</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+                  <div class="report-item">
+                      <div class="report-intensity intensity-1">1</div>
+                      <div class="report-location">臺南市歸仁區</div>
+                  </div>
+              </div>
+		  </div>
+		</div>
+		<div class="local-box">
+			<div class="local-title">Local</div>
+			<div class="local-container">
+				<div class="local-intensity intensity-8">6⁺</div>
+				<div class="wave-timer-container">
+					<div class="wave-timer">
+						<div class="wave-timer-name">P Wave</div>
+						<div class="wave-timer-value">10</div>
+					</div>
+					<div class="wave-timer">
+						<div class="wave-timer-name">S Wave</div>
+						<div class="wave-timer-value">Arrival</div>
+					</div>
+				</div>
+				<div class="local-number">1</div>
+			</div>
+		</div>
+	</div>
+	
+    <div class="report-list-wrapper">
+        <div id="report-panel" class="report-list-scrollview panel">
+            <div class="report-list-scroller">
+                <div id="list-box" class="report-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="report-box-wrapper">
+        <div id="report-box" class="report-box panel">
+            <div class="report-box-header">
+                <div class="report-box-header">
+                    <button id="report-back-btn" class="filled-button button">
+                        <span class="button-leading-icon material-symbols-rounded">arrow_back</span>
+                        <span class="button-label">返回列表</span>
+                    </button>
+                    <div id="report-source" class="report-source">交通部中央氣象署</div>
+                </div>
+                    
+                <!-- 報告標題 -->
+
+                <div class="report-title">
+                    <div class="report-title-container">
+                        <span id="report-subtitle" class="report-subtitle">編號 112085</span>
+                        <span id="report-title" class="report-title">宜蘭縣 蘇澳鎮</span>
+                    </div>
+                    <div id="report-max-intensity" class="report-max-intensity intensity-3"></div>
+                </div>
+
+                <div class="report-action-container">
+                  <button id="report-action-replay" class="report-action-chip chip">
+                    <span class="chip-leading-icon material-symbols-rounded">replay</span>
+                    <span class="chip-label">重播</span>
+                  </button>
+                  <button id="report-action-open" class="report-action-chip chip">
+                    <span class="chip-leading-icon material-symbols-rounded">captive_portal</span>
+                    <span class="chip-label">報告頁面</span>
+                  </button>
+                  <button id="report-action-copy" class="report-action-chip chip">
+                    <span class="chip-leading-icon material-symbols-rounded">content_copy</span>
+                    <span class="chip-label">複製</span>
+                  </button>
+                </div>
+            </div>
+            <div class="report-box-body">
+                <!-- 報告資訊 -->
+                <div class="report-detail">
+                    <div class="report-detail-field">
+                        <div class="report-detail-field-icon material-symbols-rounded">schedule</div>
+                            <div class="report-detail-field-divider"></div>
+                            <div class="report-detail-field-content-container">
+                            <div class="report-detail-field-name">發震時間</div>
+                            <div id="report-time" class="report-detail-field-value">2023-12-31 05:57:30</div>
+                        </div>
+                    </div>
+                    <div class="report-detail-field">
+                        <div class="report-detail-field-icon material-symbols-rounded">pin_drop</div>
+                            <div class="report-detail-field-divider"></div>
+                            <div class="report-detail-field-content-container">
+                            <div class="report-detail-field-name">震央位置</div>
+                            <div id="report-location" class="report-detail-field-value">宜蘭縣政府南南東方 14.2 公里</div>
+                        </div>
+                    </div>
+                    <div class="report-detail-field">
+                        <div class="report-detail-field-icon material-symbols-rounded">point_scan</div>
+                            <div class="report-detail-field-divider"></div>
+                            <div class="report-detail-field-content-container">
+                            <div class="report-detail-field-name">震央座標</div>
+                            <div class="report-detail-field-value"><span class="value-unit-pair"><span id="report-longitude" class="field-value">121.83</span><span class="field-unit">°E</span></span><span class="value-unit-pair"><span id="report-latitude" class="field-value">24.62</span><span class="field-unit">°N</span></span></div>
+                        </div>
+                    </div>
+                    <div class="report-detail-field-row">
+                        <div class="report-detail-field">
+                            <div class="report-detail-field-icon material-symbols-rounded">speed</div>
+                            <div class="report-detail-field-divider"></div>
+                            <div class="report-detail-field-content-container">
+                                <div class="report-detail-field-name">規模</div>
+                                <div class="report-detail-field-value"><span class="value-unit-pair"><span class="field-unit">M<sub>L</sub></span><span id="report-magnitude" class="field-value">4.5</span></span></div>
+                            </div>
+                        </div>
+                        <div class="report-detail-field">
+                            <div class="report-detail-field-icon material-symbols-rounded">keyboard_double_arrow_down</div>
+                            <div class="report-detail-field-divider"></div>
+                            <div class="report-detail-field-content-container">
+                                <div class="report-detail-field-name">深度</div>
+                                <div class="report-detail-field-value"><span class="value-unit-pair"><span id="report-depth" class="field-value">47.4</span><span class="field-unit">㎞</span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 各地最大震度 -->
+
+                <div class="report-intensity-list">
+                    <div class="report-intensity-list-header">
+                        <div class="report-intensity-list-title">各地最大震度</div>
+                        <div class="report-intensity-sort-btn-container">
+                            <label for="report-intensity-sort-group" class="report-intensity-sort-btn">
+                                <input type="radio" id="report-intensity-sort-group" name="report-intensity-sort" title="依縣市分組" checked>
+                                <span class="report-intensity-sort-btn-icon material-symbols-rounded">category</span>
+                              </label>
+                              <label for="report-intensity-sort-intensity" class="report-intensity-sort-btn">
+                                <input type="radio" id="report-intensity-sort-intensity" name="report-intensity-sort" title="依震度排序">
+                                <span class="report-intensity-sort-btn-icon material-symbols-rounded">swap_vert</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="report-intensity-list-scrollview">
+                        <div class="report-intensity-list-scroller">
+                            <div id="report-intensity-grouped" class="report-intensity-container"></div>
+                            <div id="report-intensity-all" class="report-intensity-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="time" id="time">---- / -- / -- -- : -- : --</div>
+
+
+    <script src="../js/constant.js" defer></script>
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/require.js" defer></script>
+    <script src="../js/log.js" defer></script>
+    <script src="../js/websocket.js" defer></script>
+
+    <script src="../js/config.js" defer></script>
+    <script src="../js/lang.js" defer></script>
+    <script src="../js/boostrap.js" defer></script>
+
+    <script src="../js/plugin.js" defer></script>
+    <script src="../js/key.js" defer></script>
+    <script src="../js/map.js" defer></script>
+    <script src="../js/data.js" defer></script>
+    <script src="../js/rts.js" defer></script>
+    <script src="../js/eew.js" defer></script>
+</body>
+
+</html>

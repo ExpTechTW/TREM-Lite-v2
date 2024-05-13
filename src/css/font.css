@@ -1,0 +1,38 @@
+@import url("../node_modules/@fontsource/noto-sans-tc/300.css");
+@import url("../node_modules/@fontsource/noto-sans-tc/400.css");
+@import url("../node_modules/@fontsource/noto-sans-tc/500.css");
+@import url("../node_modules/@fontsource/noto-sans-tc/600.css");
+@import url("../node_modules/@fontsource/noto-sans-tc/700.css");
+@import url("../node_modules/@fontsource/noto-sans-tc/900.css");
+
+/** Open Sans */
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 300;
+    src: url('../font/Open_Sans/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    src: url('../font/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    src: url('../font/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    src: url('../font/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 800;
+    src: url('../font/Open_Sans/OpenSans-ExtraBold.ttf') format('truetype');
+}
