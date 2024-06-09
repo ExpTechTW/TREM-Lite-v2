@@ -26,6 +26,12 @@ let Report_DATA = {};
 let last_report = {};
 const List_maxRetries = 3;
 async function report(retryCount = 0) {
+  let survey = null;
+  let check_ = 1;
+  for (const int in variable.intensity_list)
+    survey = variable.intensity_list[int].data;
+
+
   try {
     logger.info("[Fetch] Fetching report data...");
     const ReportList = document.querySelector(".report-list-items");
@@ -36,20 +42,21 @@ async function report(retryCount = 0) {
     Report_DATA = data;
     ReportList.innerHTML = "";
     let WithoutNo = "";
+    if (survey) check_ = 0;
 
-    const FirstItem = data[0];
+    const FirstItem = survey ? survey : data[0];
     const First = document.createElement("div");
     First.classList.add("report-list-item-index", "first");
-    First.setAttribute("data-report-id", FirstItem.id);
-    if ((!last_report || JSON.stringify(last_report) !== JSON.stringify({ id: FirstItem.id })) && UserCheckBox()["sound-effects-Report"] === true) {
+    First.setAttribute("data-report-id", survey ? "" : FirstItem.id);
+    if ((!last_report || JSON.stringify(last_report) !== JSON.stringify({ id: FirstItem.id })) && UserCheckBox()["sound-effects-Report"] == true) {
       last_report = { id: FirstItem.id };
       constant.AUDIO.REPORT.play();
     }
 
-    const No = FirstItem.id.split("-");
-    const check_No = No[0].split(3)[1];
+    const No = survey ? "" : FirstItem.id.split("-");
+    const check_No = survey ? "" : No[0].split(3)[1];
 
-    if (check_No === "000")
+    if (check_No == "000")
       WithoutNo = "Normal";
 
 
@@ -57,8 +64,8 @@ async function report(retryCount = 0) {
     IntWrapper.classList.add("report-list-item-int-wrapper");
 
     const Int = document.createElement("div");
-    Int.classList.add("report-list-item-int", `intensity-${FirstItem.int}`);
-    Int.textContent = FirstItem.int;
+    Int.classList.add("report-list-item-int", `intensity-${survey ? survey.max : FirstItem.int}`);
+    Int.textContent = survey ? survey.max : FirstItem.int;
 
     const IntTitle = document.createElement("div");
     IntTitle.classList.add("report-list-item-int-title");
@@ -76,47 +83,49 @@ async function report(retryCount = 0) {
 
     const Location = document.createElement("div");
     Location.classList.add("report-list-item-location");
-    Location.textContent = LocalReplace(FirstItem.loc);
+    Location.textContent = survey ? "震源 調查中" : LocalReplace(FirstItem.loc);
 
     const Time = document.createElement("div");
     Time.classList.add("report-list-item-time");
-    Time.textContent = ReportTimeFormat(FirstItem.time);
+    Time.textContent = ReportTimeFormat(survey ? survey.id : FirstItem.time);
 
     Info.appendChild(Location);
     Info.appendChild(Time);
-
-    let MagDepthWrapper = document.createElement("div");
-    MagDepthWrapper.classList.add("report-list-item-mag-depth");
-
-    const Mag = document.createElement("div");
-    Mag.classList.add("report-list-item-mag");
-    Mag.dataset.backgroundText = "規模";
-    Mag.innerHTML = `<div class="report-list-item-magnitude ${WithoutNo}">${FirstItem.mag < 10 ? FirstItem.mag.toFixed(1) : FirstItem.mag}</div>`;
-
-    const KM = document.createElement("div");
-    KM.classList.add("report-list-item-km");
-    KM.dataset.backgroundText = "深度";
-    KM.innerHTML = `<div class="km">${FirstItem.depth}</div>`;
-
-    MagDepthWrapper.appendChild(Mag);
-    MagDepthWrapper.appendChild(KM);
-
     InfoWrapper.appendChild(Info);
-    InfoWrapper.appendChild(MagDepthWrapper);
+
+    if (!survey) {
+      const MagDepthWrapper = document.createElement("div");
+      MagDepthWrapper.classList.add("report-list-item-mag-depth");
+
+      const Mag = document.createElement("div");
+      Mag.classList.add("report-list-item-mag");
+      Mag.dataset.backgroundText = "規模";
+      Mag.innerHTML = `<div class="report-list-item-magnitude ${WithoutNo}">${FirstItem.mag < 10 ? FirstItem.mag.toFixed(1) : FirstItem.mag}</div>`;
+
+      const KM = document.createElement("div");
+      KM.classList.add("report-list-item-km");
+      KM.dataset.backgroundText = "深度";
+      KM.innerHTML = `<div class="km">${FirstItem.depth}</div>`;
+
+      MagDepthWrapper.appendChild(Mag);
+      MagDepthWrapper.appendChild(KM);
+
+      InfoWrapper.appendChild(MagDepthWrapper);
+    }
 
     First.appendChild(InfoWrapper);
 
     ReportList.appendChild(First);
 
     // 非First
-    for (let i = 1; i < data.length; i++) {
+    for (let i = check_; i < data.length; i++) {
       WithoutNo = "";
       const item = data[i];
 
       const No = item.id.split("-");
       const check_No = No[0].split(3)[1];
 
-      if (check_No === "000")
+      if (check_No == "000")
         WithoutNo = "Normal";
 
       const Element = document.createElement("div");
@@ -314,7 +323,7 @@ function report_all(data) {
 function show_rts_list(status) {
   const RTS_List = querySelector(".intensity-container");
 
-  if (status === true) {
+  if (status == true) {
     RTS_List.classList.remove("hidden");
     ReportListWrapper.classList.add("hidden");
     display_element([ReportBoxWrapper]);
@@ -363,15 +372,15 @@ function ReportTimeFormat(timestamp) {
 // 地震報告收展
 ReportListBtn.addEventListener("click", function() {
   const ArrowSpan = this.querySelector(".nav-item-icon");
-  ArrowSpan.textContent = ArrowSpan.textContent.trim() === "chevron_right" ? "chevron_left" : "chevron_right";
+  ArrowSpan.textContent = ArrowSpan.textContent.trim() == "chevron_right" ? "chevron_left" : "chevron_right";
   ReportListWrapper.classList.toggle("hidden");
 });
 
 // 地震報告項目
 ReportItem.addEventListener("click", (event) => {
   const { dataset: { reportId: ReportID } } = event.target.closest(".report-list-item-index");
-  const ThisReport = Report_DATA.find(ReportInt => ReportInt.id === ReportID);
-  ReportInfo(ReportID, ThisReport.int);
+  const ThisReport = Report_DATA.find(ReportInt => ReportInt.id == ReportID);
+  if (ThisReport) ReportInfo(ReportID, ThisReport.int);
 });
 
 // 地震報告詳細資訊各地震度下拉
@@ -380,7 +389,7 @@ document.addEventListener("click", (event) => {
   if (ReportListItem) {
     const wrapper = ReportListItem.closest(".report-list-item-wrapper");
     const ArrowSpan = ReportListItem.querySelector(".report-arrow-down");
-    ArrowSpan.textContent = ArrowSpan.textContent.trim() === "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
+    ArrowSpan.textContent = ArrowSpan.textContent.trim() == "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
     wrapper.classList.toggle("active");
   }
 });

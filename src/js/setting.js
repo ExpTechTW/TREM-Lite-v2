@@ -157,7 +157,7 @@ Back.addEventListener("click", () => {
 // 所在地-下拉選單點擊事件
 Location.addEventListener("click", function() {
   const ArrowSpan = this.querySelector(".selected-btn");
-  ArrowSpan.textContent = ArrowSpan.textContent.trim() === "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
+  ArrowSpan.textContent = ArrowSpan.textContent.trim() == "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
   LocationSelectWrapper.classList.toggle("select-show-big");
 });
 
@@ -232,7 +232,7 @@ TownItems.addEventListener("click", (event) => {
 function findStationByLocation(city, town) {
   const location = `${city}${town}`;
   for (const station of StationList)
-    if (station.loc === location)
+    if (station.loc == location)
       return station;
 
 
@@ -414,7 +414,7 @@ StationLocation.addEventListener("click", handleLocationClick);
 
 function handleLocationClick() {
   const ArrowSpan = this.querySelector(".selected-btn");
-  ArrowSpan.textContent = ArrowSpan.textContent.trim() === "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
+  ArrowSpan.textContent = ArrowSpan.textContent.trim() == "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
   StationSelectWrapper.classList.toggle("select-show-big");
 }
 
@@ -532,12 +532,12 @@ async function handleUserAction(endpoint, options) {
     switch (true) {
       case response.ok: {
         LoginMsg.classList.add("success");
-        LoginMsg.textContent = `${options.method === "POST" ? "登入" : "登出"}成功！`;
-        if (endpoint === "login") LoginSuccess(await getUserInfo(responseData));
-        if (endpoint === "logout") LogoutSuccess();
+        LoginMsg.textContent = `${options.method == "POST" ? "登入" : "登出"}成功！`;
+        if (endpoint == "login") LoginSuccess(await getUserInfo(responseData));
+        if (endpoint == "logout") LogoutSuccess();
         break;
       }
-      case response.status === 400 || response.status === 401:
+      case response.status == 400 || response.status == 401:
         LoginMsg.classList.add("error");
         LoginMsg.textContent = "帳號或密碼錯誤！";
         LoginMsg.classList.add("shake");
@@ -604,7 +604,7 @@ const clickEvent = new MouseEvent("click", {
 function initializeSelect(type, location, showInt, selectWrapper, items) {
   location.addEventListener("click", function() {
     const ArrowSpan = this.querySelector(".selected-btn");
-    ArrowSpan.textContent = ArrowSpan.textContent.trim() === "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
+    ArrowSpan.textContent = ArrowSpan.textContent.trim() == "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
     selectWrapper.classList.toggle("select-show-big");
   });
 
@@ -793,7 +793,7 @@ const addMapDisplayEffectSelectEvent = (MapDisplayEffectContainer, selectElement
 
 MapDisplayEffectLocation.addEventListener("click", function() {
   const ArrowSpan = this.querySelector(".selected-btn");
-  ArrowSpan.textContent = ArrowSpan.textContent.trim() === "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
+  ArrowSpan.textContent = ArrowSpan.textContent.trim() == "keyboard_arrow_up" ? "keyboard_arrow_down" : "keyboard_arrow_up";
   MapDisplayEffectSelectWrapper.classList.toggle("select-show-big");
 });
 
