@@ -128,12 +128,14 @@ function int_to_color(int) {
 }
 
 const domMethods = {
-  querySelector    : document.querySelector.bind(document),
-  querySelectorAll : document.querySelectorAll.bind(document),
-  createElement    : document.createElement.bind(document),
+  querySelector          : document.querySelector.bind(document),
+  querySelectorAll       : document.querySelectorAll.bind(document),
+  createElement          : document.createElement.bind(document),
+  getElementById         : document.getElementById.bind(document),
+  getElementsByClassName : document.getElementsByClassName.bind(document),
 };
 
-const { querySelector, querySelectorAll, createElement } = domMethods;
+const { querySelector, querySelectorAll, createElement, getElementById, getElementsByClassName } = domMethods;
 
 function checkbox(type) {
   const box = JSON.parse(localStorage.getItem("user-checkbox"));

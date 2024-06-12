@@ -20,7 +20,7 @@ const TownSel = LocationSelWrapper.querySelector(".current-town");
 const TownItems = LocationSelWrapper.querySelector(".town");
 
 // 版本號、UUID
-version.textContent = "2.0.0";
+version.textContent = app.getVersion();
 
 function set_ls(key, data) {
   localStorage.setItem(key, data);

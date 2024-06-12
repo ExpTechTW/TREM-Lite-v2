@@ -31,7 +31,7 @@ async function report(retryCount = 0) {
     s = variable.intensity_list[int].data;
   try {
     logger.info("[Fetch] Fetching report data...");
-    const ReportList = document.querySelector(".report-list-items");
+    const ReportList = querySelector(".report-list-items");
     const res = await fetchData(`${API_url()}v2/eq/report?limit=20`);
     if (!res.ok) return;
     logger.info("[Fetch] Got report data");
@@ -40,6 +40,7 @@ async function report(retryCount = 0) {
 
     if (s) variable.report.check_ = 0;
     variable.report.data = data;
+    variable.report.withoutNo = "";
 
     const FirstItem = s ? s : data[0];
     const First = createElement("div");
@@ -172,7 +173,7 @@ function report_more(data, int) {
 
 function report_grouped(data) {
   opacity([ReportListWrapper, InfoBox], 0);
-  const RepoListWrapper = document.querySelector("#report-intensity-grouped");
+  const RepoListWrapper = querySelector("#report-intensity-grouped");
   RepoListWrapper.innerHTML = "";
 
   const cities = Object.keys(data.list);
@@ -215,7 +216,7 @@ function report_grouped(data) {
 }
 
 function report_all(data) {
-  const reportContainer = document.getElementById("report-intensity-all");
+  const reportContainer = getElementById("report-intensity-all");
   reportContainer.innerHTML = "";
 
   Object.entries(data.list).forEach(([city, { int: cityIntensity }]) => {
@@ -298,7 +299,7 @@ ReportItem.addEventListener("click", (event) => {
 });
 
 // 地震報告詳細資訊各地震度下拉
-document.addEventListener("click", (event) => {
+addEventListener("click", (event) => {
   const ReportListItem = event.target.closest(".report-list-item");
   if (ReportListItem) {
     const wrapper = ReportListItem.closest(".report-list-item-wrapper");
@@ -310,7 +311,8 @@ document.addEventListener("click", (event) => {
 
 // 報告頁面
 ReportActionOpen.addEventListener("click", () => {
-  const id = variable.report.more.id.split("-");
+  const data = localStorage.getItem("report-more");
+  const id = JSON.stringify(data).id.split("-");
   const filtered = id.filter((part, index) => index !== 1).join("-");
   window.open(`https://www.cwa.gov.tw/V8/C/E/EQ/EQ${filtered}.html`, "_blank");
 });

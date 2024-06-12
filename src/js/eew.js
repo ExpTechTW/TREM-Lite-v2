@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const current_location_int = querySelector(".local-intensity");
 let draw_lock = false;
 let last_show_epicenter_time = 0;
 let last_map_update = 0;
@@ -64,7 +65,7 @@ setInterval(() => {
   const time_now = now();
   if (time_now - last_show_epicenter_time > 1000) {
     last_show_epicenter_time = time_now;
-    const flashElements = document.getElementsByClassName("flash");
+    const flashElements = getElementsByClassName("flash");
     for (const item of flashElements) item.style.visibility = "visible";
     setTimeout(() => {
       for (const item of flashElements) item.style.visibility = "hidden";
@@ -101,7 +102,8 @@ setInterval(() => {
         zIndex  : 5,
         style   : (args) => {
           const name = args.COUNTYNAME + " " + args.TOWNNAME;
-          const intensity = intensity_float_to_int(variable.eew_list[_eew_list[last_map_count]].eew_intensity_list[name].i);
+          const intensity = intensity_float_to_int(variable.eew_list[_eew_list[last_map_count]] ? variable.eew_list[_eew_list[last_map_count]].eew_intensity_list[name].i : "");
+          curr_loc_int(name, intensity);
           let color = (!intensity) ? "#3F4045" : int_to_color(intensity);
           let nsspe = 0;
           if (data.eq.area)
@@ -122,17 +124,30 @@ setInterval(() => {
       }).addTo(variable.map);
     }
   }
-  document.getElementById("info-depth").textContent = data.eq.depth;
-  document.getElementById("info-no").textContent = `第${data.serial}報${(data.final) ? "(最終)" : ""}`;
-  document.getElementById("info-loc").textContent = data.eq.loc;
-  document.getElementById("info-mag").textContent = data.eq.mag.toFixed(1);
-  document.getElementById("info-time").textContent = formatTime(data.eq.time);
-  document.getElementById("info-title-box-type").textContent = ((_eew_list.length > 1) ? `${last_map_count + 1}/${_eew_list.length} ` : "") + ((!data.status) ? "地震速報｜CWA" : (data.status == 1) ? "緊急地震速報｜CWA" : "地震速報(取消)｜CWA");
-  document.getElementById("info-box").style.backgroundColor = (!data.status) ? "#FF9900" : (data.status == 1) ? "#C00000" : "#505050";
-  const info_intensity = document.getElementById("info-intensity");
+  (data.status == 1) ? "" : curr_loc_int("", 0);
+  getElementById("info-depth").textContent = data.eq.depth;
+  getElementById("info-no").textContent = `第${data.serial}報${(data.final) ? "(最終)" : ""}`;
+  getElementById("info-loc").textContent = data.eq.loc;
+  getElementById("info-mag").textContent = data.eq.mag.toFixed(1);
+  getElementById("info-time").textContent = formatTime(data.eq.time);
+  getElementById("info-title-box-type").textContent = ((_eew_list.length > 1) ? `${last_map_count + 1}/${_eew_list.length} ` : "") + ((!data.status) ? "地震速報｜CWA" : (data.status == 1) ? "緊急地震速報｜CWA" : "地震速報(取消)｜CWA");
+  getElementById("info-box").style.backgroundColor = (!data.status) ? "#FF9900" : (data.status == 1) ? "#C00000" : "#505050";
+  const info_intensity = getElementById("info-intensity");
   info_intensity.textContent = intensity_list[data.eq.max];
   info_intensity.className = `info-body-title-title-box intensity-${data.eq.max}`;
 }, 1000);
+
+function curr_loc_int(name, intensity) {
+  const curr_loc = JSON.parse(localStorage.getItem("current-location"));
+  if (name.includes(`${curr_loc.city} ${curr_loc.town}`) || !name) {
+    current_location_int.textContent = intensity ? intensity : "0";
+    const classes = current_location_int.className.split(" ");
+    for (const cls of classes)
+      if (cls.startsWith("intensity-"))
+        current_location_int.classList.remove(cls);
+    current_location_int.classList.add(`intensity-${intensity ? intensity : "0"}`);
+  }
+}
 
 // setTimeout(() => {
 //   show_eew({
@@ -168,15 +183,15 @@ function show_eew(data) {
     data.status = 3;
 
   if (data.status == 3) {
-    if (data.final) variable.eew_list[data.id].cancel_timer = setTimeout(() => {
-      variable.eew_list[data.id].layer.epicenterIcon.remove();
+    if (data.final && variable.eew_list[data.id]) variable.eew_list[data.id].cancel_timer = setTimeout(() => {
+      if (variable.eew_list[data.id]) variable.eew_list[data.id].layer.epicenterIcon.remove();
       delete variable.eew_list[data.id];
     }, 30000);
     else {
-      variable.eew_list[data.id].data = data;
+      if (variable.eew_list[data.id]) variable.eew_list[data.id].data = data;
       last_map_update = 0;
-      if (!variable.eew_list[data.id].cancel) {
-        variable.eew_list[data.id].cancel = true;
+      if (variable.eew_list[data.id] && !variable.eew_list[data.id].cancel) {
+        if (variable.eew_list[data.id]) variable.eew_list[data.id].cancel = true ;
         if (checkbox("sound-effects-Update") == true) constant.AUDIO.UPDATE.play();
         variable.eew_list[data.id].layer.s.remove();
         variable.eew_list[data.id].layer.s_fill.remove();
@@ -194,7 +209,7 @@ function show_eew(data) {
 
   if (!variable.eew_list[data.id] || variable.eew_list[data.id].cancel) {
     if (variable.eew_list[data.id] && variable.eew_list[data.id].cancel) {
-      variable.eew_list[data.id].layer.epicenterIcon.remove();
+      if (variable.eew_list[data.id]) variable.eew_list[data.id].layer.epicenterIcon.remove() ;
       show_rts_list(false);
     } else
       if (checkbox("sound-effects-EEW") == 1) constant.AUDIO.EEW.play();
@@ -282,7 +297,7 @@ function show_eew(data) {
 
   if (data.eq.max > 4 && !variable.eew_list[data.id].alert) {
     variable.eew_list[data.id].alert = true;
-    if (checkbox("sound-effects-EEW2") == 1) constant.AUDIO.ALERT.play();
+    if (checkbox("sound-effects-ALERT") == 1) constant.AUDIO.ALERT.play();
   }
 
   variable.eew_list[data.id].eew_intensity_list = eew_area_pga(data.eq.lat, data.eq.lon, data.eq.depth, data.eq.mag);

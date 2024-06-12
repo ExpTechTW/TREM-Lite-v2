@@ -77,8 +77,8 @@ const constant = {
     SHINDO0   : new Audio("../audio/SHINDO0.wav"),
     SHINDO1   : new Audio("../audio/SHINDO1.wav"),
     SHINDO2   : new Audio("../audio/SHINDO2.wav"),
-    TSUNAMI   : new Audio("../audio/TSUNAMI.wav"),
     UPDATE    : new Audio("../audio/UPDATE.wav"),
+    TSUNAMI   : new Audio("../audio/TSUNAMI.wav"),
   },
   SETTING: {
     MAP_DISPLAY: {
@@ -126,6 +126,7 @@ const constant = {
       "sound-effects-Shindo2"    : 1,
       "sound-effects-Update"     : 1,
       "sound-effects-dong"       : 1,
+      "sound-effects-Tsunami"    : 1,
     },
     LOCALSTORAGE_DEF: {
       "current-location"           : { city: "臺南市", town: "歸仁區", lat: 22.967286, lon: 120.2940045 },

@@ -2,8 +2,8 @@
 get_station_info();
 setInterval(get_station_info, constant.STATION_INFO_FETCH_TIME);
 
-const max_pga_text = document.getElementById("max-pga");
-const realtime_list = document.getElementById("realtime-list");
+const max_pga_text = getElementById("max-pga");
+const realtime_list = getElementById("realtime-list");
 
 function get_station_info() {
   logger.info("[Fetch] Fetching station data...");
@@ -91,14 +91,14 @@ function show_rts_dot(data, alert) {
     realtime_list.innerHTML = "";
 
     for (const area of data.int) {
-      const box = document.createElement("div");
+      const box = createElement("div");
       box.className = "realtime-item";
 
-      const int = document.createElement("div");
+      const int = createElement("div");
       int.className = `realtime-intensity intensity-${area.i}`;
       int.textContent = int_to_intensity(area.i);
 
-      const loc = document.createElement("div");
+      const loc = createElement("div");
       loc.className = "realtime-location";
       const loc_str = region_code_to_string(constant.REGION, area.code);
       loc.textContent = `${loc_str.city}${loc_str.town}`;
@@ -228,6 +228,6 @@ function show_rts_dot(data, alert) {
 
   max_pga_text.textContent = `${(max_pga > 999) ? "999+" : max_pga.toFixed(2)} gal`;
   max_pga_text.className = `intensity-${max_shindo}`;
-  document.getElementById("trigger").textContent = trigger;
-  document.getElementById("level").textContent = Math.round(level);
+  getElementById("trigger").textContent = trigger;
+  getElementById("level").textContent = Math.round(level);
 }

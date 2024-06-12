@@ -63,7 +63,7 @@ async function realtime_rts() {
   if (alert) show_rts_box(data.box);
 
   variable.last_get_data_time = now();
-  document.getElementById("connect").style.color = "goldenrod";
+  getElementById("connect").style.color = "goldenrod";
 }
 
 async function realtime_eew() {

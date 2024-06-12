@@ -33,7 +33,7 @@
 
 function show_intensity(data) {
   if (!variable.intensity_list[data.id] || variable.intensity_list[data.id].data.serial < data.serial) {
-    constant.AUDIO.INTENSITY.play();
+    if (checkbox("sound-effects-EEW2") == true) constant.AUDIO.INTENSITY.play();
     if (!variable.intensity_list[data.id])
       variable.intensity_list[data.id] = {
         data,
