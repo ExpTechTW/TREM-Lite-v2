@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-hsl: 0deg 0% 25%;
+  --surface-variant-hsl: 0deg 0% 20%;
+  --background-hsl: 0deg 0% 13%;
+  --background-variant-hsl: 0deg 0% 16%;
+}
+
+body {
+  user-select: none;
+  margin: 0;
+  font-family: "Lato", "Noto Sans TC", sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+
+  background-color: hsl(var(--background-hsl));
+  color: white;
+}
