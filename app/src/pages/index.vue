@@ -80,7 +80,7 @@
       transition-timing-function: cubic-bezier(0.3, 0, 0.8, 0.15);
     "
   >
-    <div class="flex justify-between px-2 text-sm font-bold leading-4">
+    <div class="flex justify-between px-2 text-sm font-bold">
       <div>暫無生效中的地震預警</div>
       <div>第4報</div>
     </div>
@@ -102,7 +102,7 @@
         <div class="flex w-full flex-col">
           <div class="flex flex-1 flex-col gap-1 rounded-xl bg-gray-900 p-2">
             <div
-              class="info-body-location-text font-noto-sans-tc text-xl font-bold leading-5"
+              class="info-body-location-text font-noto-sans-tc text-xl font-bold"
               :class="{ 'info-body-location-text': true }"
             >
               花蓮縣壽豐鄉
@@ -141,7 +141,7 @@
               <span>NSSPE</span><span>無震源參數推算</span>
             </div>
           </div>
-          <div class="flex justify-center gap-2 text-xs">
+          <div class="mt-1 flex justify-center gap-2 text-xs">
             <span class="font-bold">2024/06/26 00:00:00</span>
             <span>發震</span>
           </div>
@@ -149,20 +149,18 @@
       </div>
 
       <div
-        class="cancel-box absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-lg bg-black bg-opacity-60 text-white"
+        class="cancel-box absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-lg bg-black bg-opacity-60 text-white backdrop-blur-sm"
       >
-        <div
-          class="flex w-20 justify-between text-3xl font-extrabold leading-9"
-        >
+        <div class="flex w-20 justify-between text-3xl font-extrabold">
           <span>取</span><span>消</span>
         </div>
-        <div class="text-sm font-medium leading-5">此地震速報已取消</div>
+        <div class="text-sm font-medium">此地震速報已取消</div>
       </div>
     </div>
   </div>
 
   <div
-    class="absolute bottom-0 right-0 m-2 flex hidden h-[calc(100vh-170px)] w-[calc(20vw+16px)] min-w-[320px] max-w-[335px] flex-col gap-8"
+    class="absolute bottom-0 right-0 m-2 flex h-[calc(100vh-195px)] w-[calc(20vw+16px)] min-w-[300px] max-w-[320px] flex-col gap-8"
   >
     <div class="realtime-box z-10 flex min-h-0 flex-1 flex-col text-white">
       <div
@@ -170,7 +168,7 @@
       >
         <div class="realtime-header text-lg font-bold">即時震度</div>
         <div
-          class="realtime-list flex min-h-0 flex-col gap-4 overflow-y-hidden rounded-xl"
+          class="realtime-list flex min-h-0 flex-col gap-2 overflow-y-hidden rounded-xl"
           id="realtime-list"
         >
           <div class="realtime-item">
@@ -185,7 +183,7 @@
       </div>
     </div>
     <div
-      class="local-box z-10 flex gap-0.5 rounded-lg bg-gray-800 bg-opacity-75 p-2 pl-3 text-white"
+      class="local-box z-10 flex h-20 gap-0.5 rounded-lg bg-gray-800 bg-opacity-75 p-2 pl-3 text-white"
     >
       <div
         class="local-title text-center text-xs opacity-60"
@@ -193,21 +191,27 @@
       >
         所在地預估
       </div>
-      <div
-        class="local-container relative flex flex-1 gap-2 rounded-xl bg-gray-600"
-      >
-        <div class="local-intensity intensity-8">6⁺</div>
-        <div class="wave-timer-container">
-          <div class="wave-timer">
-            <div class="wave-timer-name">P波</div>
-            <div class="wave-timer-value">10</div>
+      <div class="relative flex flex-1 gap-2 rounded-xl bg-gray-600">
+        <div
+          class="leading-11 intensity-8 flex h-16 w-16 items-center justify-center rounded-lg p-2 text-center text-4xl font-extrabold shadow-md"
+        >
+          6⁺
+        </div>
+        <div class="grid flex-1 grid-cols-2">
+          <div class="flex flex-col gap-1 p-1">
+            <div class="text-sm opacity-60">P波</div>
+            <div class="leading-26 text-center text-2xl font-bold">10</div>
           </div>
-          <div class="wave-timer">
-            <div class="wave-timer-name">S波</div>
-            <div class="wave-timer-value">抵達</div>
+          <div class="flex flex-col gap-1 p-1">
+            <div class="text-sm opacity-60">S波</div>
+            <div class="leading-26 text-center text-2xl font-bold">抵達</div>
           </div>
         </div>
-        <div class="local-number">1</div>
+        <div
+          class="absolute right-0 h-5 w-5 -translate-y-1/4 translate-x-1/4 transform rounded-full bg-slate-500 text-center text-xs font-semibold leading-5 text-black"
+        >
+          1
+        </div>
       </div>
     </div>
   </div>
