@@ -1,0 +1,158 @@
+.pga-intensity-0 {
+  background-color: lightgray;
+
+  &:empty::after {
+    content: "1";
+  }
+}
+
+.intensity-0 {
+  border: 1px solid #80808047;
+  color: white;
+  background-color: #202020;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "0";
+  }
+}
+
+.intensity-1 {
+  border: 1px solid #004183;
+  color: white;
+  background-color: #003264;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "1";
+  }
+}
+
+.intensity-2 {
+  border: 1px solid #0179f1;
+  color: white;
+  background-color: #0064c8;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "2";
+  }
+}
+
+.intensity-3 {
+  border: 1px solid #26a73c;
+  color: white;
+  background-color: #1e9632;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "3";
+  }
+}
+
+.intensity-4 {
+  border: 1px solid #ffd53c;
+  color: black;
+  background-color: #ffc800;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "4";
+  }
+}
+
+.intensity-5 {
+  border: 1px solid #ffab33;
+  color: black;
+  background-color: #ff9600;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "5⁻";
+  }
+}
+
+.intensity-6 {
+  border: 1px solid #ff7f2c;
+  color: black;
+  background-color: #ff6400;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "5⁺";
+  }
+}
+
+.intensity-7 {
+  border: 1px solid #ff3535;
+  color: white;
+  background-color: #ff0000;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "6⁻";
+  }
+}
+
+.intensity-8 {
+  border: 1px solid #c90000;
+  color: white;
+  background-color: #c00000;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "6⁺";
+  }
+}
+
+.intensity-9 {
+  border: 1px solid #9e00d3;
+  color: white;
+  background-color: #9600c8;
+  box-sizing: border-box;
+
+  &:empty::after {
+    content: "7";
+  }
+}
+
+.intensity-unknow {
+  border: 1px solid #80808047;
+  color: white;
+  background-color: #202020;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.intensity-box {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 25%;
+}
+
+.realtime-item {
+  display: flex;
+  background-color: #282828;
+  border-radius: 17px;
+}
+
+.realtime-intensity {
+  width: 44px;
+  height: 23px;
+  border-radius: 17px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.realtime-location {
+  padding-left: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}

@@ -19,3 +19,15 @@ body {
   background-color: hsl(var(--background-hsl));
   color: white;
 }
+
+.tos_body li {
+  list-style-type: decimal;
+}
+
+.local-title {
+  writing-mode: vertical-rl;
+}
+
+.local-container {
+  background-color: #505050;
+}
