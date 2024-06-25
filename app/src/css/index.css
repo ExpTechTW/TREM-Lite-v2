@@ -31,3 +31,11 @@ body {
 .local-container {
   background-color: #505050;
 }
+
+.cancel-box {
+  text-shadow:
+    2px 2px black,
+    -2px -2px black,
+    -2px 2px black,
+    2px -2px black;
+}

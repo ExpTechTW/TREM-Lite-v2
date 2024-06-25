@@ -148,15 +148,21 @@
         </div>
       </div>
 
-      <div class="cancel-box">
-        <div class="cancel-title"><span>取</span><span>消</span></div>
-        <div class="cancel-body">此地震速報已取消</div>
+      <div
+        class="cancel-box absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-lg bg-black bg-opacity-60 text-white"
+      >
+        <div
+          class="flex w-20 justify-between text-3xl font-extrabold leading-9"
+        >
+          <span>取</span><span>消</span>
+        </div>
+        <div class="text-sm font-medium leading-5">此地震速報已取消</div>
       </div>
     </div>
   </div>
 
   <div
-    class="intensity-container absolute bottom-0 right-0 m-2 flex h-[calc(100vh-170px)] w-[calc(20vw+16px)] min-w-[320px] max-w-[335px] flex-col gap-8"
+    class="absolute bottom-0 right-0 m-2 flex hidden h-[calc(100vh-170px)] w-[calc(20vw+16px)] min-w-[320px] max-w-[335px] flex-col gap-8"
   >
     <div class="realtime-box z-10 flex min-h-0 flex-1 flex-col text-white">
       <div
