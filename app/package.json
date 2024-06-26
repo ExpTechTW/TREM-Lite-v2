@@ -21,6 +21,9 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron-forge/plugin-vite": "^7.4.0",
     "@electron/fuses": "^1.8.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/leaflet": "^1.9.12",
+    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.19",
@@ -45,8 +48,10 @@
     "@exptechtw/api-wrapper": "github:ExpTechTW/api-wrapper",
     "@vitejs/plugin-vue": "^5.0.5",
     "electron-squirrel-startup": "^1.0.1",
+    "leaflet": "^1.9.4",
     "primevue": "^4.0.0-rc.1",
     "vue": "^3.4.30",
-    "vue-router": "^4.4.0"
+    "vue-router": "^4.4.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
