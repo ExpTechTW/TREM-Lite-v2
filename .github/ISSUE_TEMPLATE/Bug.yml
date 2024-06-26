@@ -1,0 +1,59 @@
+name: "🚧問題回報"
+labels: ["錯誤"]
+projects: ["ExpTechTW/12"]
+description: |
+  請詳細描述你遇到的問題協助我們排除問題
+body:
+- type: dropdown
+  id: platform
+  attributes:
+    label: 平台
+    options:
+    - Windows
+    - MacOS
+    default: 0
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: 版本
+    description: 填入版本
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: 裝置
+    description: 填入裝置名稱
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: 內文
+    description: 請輸入內容
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: 重現步驟
+    description: 如果有的話請輸入重現步驟
+    placeholder: |
+      1. ...
+      2. ...
+      3. ...
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: 影片/照片
+    description: 如果有的話請上傳影片或照片
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: 日誌
+    description: 如果有的話請輸入日誌內容
+  validations:
+    required: false
+- type: markdown
+  attributes:
+    value: "### 此檔案由 ExpTech Studio 設計製作"
