@@ -10,7 +10,7 @@ body:
     label: 平台
     options:
     - Windows
-    - MacOS
+    - macOS
     default: 0
   validations:
     required: true
