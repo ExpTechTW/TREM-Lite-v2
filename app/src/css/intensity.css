@@ -132,13 +132,13 @@
   border-radius: 25%;
 }
 
-.realtime-item {
+.rt-item {
   display: flex;
   background-color: #282828;
   border-radius: 17px;
 }
 
-.realtime-intensity {
+.rt-int {
   width: 44px;
   height: 23px;
   border-radius: 17px;
@@ -149,7 +149,7 @@
   justify-content: center;
 }
 
-.realtime-location {
+.rt-loc {
   padding-left: 8px;
   font-size: 13px;
   font-weight: 500;

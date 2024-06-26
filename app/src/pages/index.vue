@@ -1,6 +1,6 @@
 <template>
   <div
-    class="backdrop-blur-18 absolute inset-0 z-50 hidden flex-col items-center justify-center bg-black bg-opacity-100 text-white opacity-100 transition-opacity duration-300"
+    class="backdrop-blur-18 absolute inset-0 z-[1002] hidden flex-col items-center justify-center bg-black bg-opacity-100 text-white opacity-100 transition-opacity duration-300"
   >
     <div
       class="tos_wrapper border-opacity-14 opacity-1 flex w-auto flex-col items-center rounded-lg border border-white p-4 transition-opacity duration-300"
@@ -29,13 +29,14 @@
     </div>
   </div>
 
+  <!--最大加速度&Level&Trigger-->
   <div class="int-info relative z-[1001]">
     <div
       class="max-pga pointer-events-none absolute left-1 top-1 z-10 w-20 rounded-md border-2 border-black border-opacity-10 bg-black bg-opacity-75 p-1 text-center text-xs font-medium text-white"
     >
       <div>最大加速度</div>
       <div id="max-pga" class="intensity-0 mt-1 rounded p-0.5">
-        {{ maxPga }} gal
+        {{ maxPga ? maxPga : "0.00" }} gal
       </div>
     </div>
     <div
@@ -59,7 +60,7 @@
       ' connect-wrapper pointer-events-none absolute bottom-0 left-0 z-[1001] m-1 ml-1 flex items-center rounded-lg border-2 border-black border-opacity-10 bg-black bg-opacity-75 p-px'
     "
   >
-    <div class="time text-red z-10 text-base font-bold">
+    <div class="time text-red z-10 text-sm font-bold">
       {{ timeUpdate.docTime.value }}
     </div>
     <div class="icon text-red z-10">
@@ -79,44 +80,46 @@
     </div>
   </div>
 
+  <!--報數-->
   <div
     id="info-box"
-    class="info-box absolute right-0 top-0 z-[1001] m-2 flex w-[20vw] min-w-[300px] max-w-[320px] flex-col gap-2 whitespace-nowrap rounded-lg bg-gray-600 bg-opacity-75 p-2 text-white"
+    class="info-box pointer-events-none absolute right-0 top-0 z-[1001] m-2 flex w-[20vw] min-w-[300px] max-w-[320px] flex-col gap-1 whitespace-nowrap rounded-lg bg-[rgba(56,56,56,0.73)] bg-opacity-75 p-2 text-white"
     style="
       transition-property: opacity, transform;
       transition-duration: 0.2s;
       transition-timing-function: cubic-bezier(0.3, 0, 0.8, 0.15);
     "
   >
-    <!--報數-->
     <div class="flex justify-between px-2 text-sm font-bold">
       <div>暫無生效中的地震預警</div>
       <div>第4報</div>
     </div>
     <div
-      class="info-body-box relative flex flex-col gap-1 rounded-lg bg-gray-700 p-2"
+      class="info-body-box relative flex flex-col gap-1 rounded-lg bg-[rgba(0,0,0,0.4)] p-2"
     >
       <div class="h-18 opacity-1 flex gap-2">
         <!--預估最大震度-->
         <div class="flex flex-col items-center gap-1">
           <div
-            class="info-body-title-title-box line-height-[56px] font-open-sans intensity-9 flex h-20 w-20 flex-row flex-wrap items-center justify-center rounded-xl p-2 text-center text-4xl font-extrabold"
+            class="info-body-title-title-box line-height-[56px] font-open-sans intensity-1 flex h-[4.3rem] w-[4.3rem] flex-row flex-wrap items-center justify-center rounded-xl p-2 text-center text-4xl font-extrabold"
             id="info-intensity"
           >
-            <span> 7</span>
+            <span>3</span>
           </div>
           <div class="text-xs">預估最大震度</div>
         </div>
         <!--速報資訊-->
         <div class="flex w-full flex-col">
-          <div class="flex flex-1 flex-col gap-1 rounded-xl bg-gray-900 p-2">
+          <div
+            class="flex flex-1 flex-col justify-center rounded-xl bg-[rgba(0,0,0,0.4)] p-2 pb-0 pt-0"
+          >
             <div
               class="info-body-location-text font-noto-sans-tc text-xl font-bold"
               :class="{ 'info-body-location-text': true }"
             >
               花蓮縣壽豐鄉
             </div>
-            <div class="flex justify-between p-1">
+            <div class="flex justify-between p-1 pb-0 pt-0">
               <!--規模-->
               <div
                 class="info-body-magnitude isolation-isolate magnitude-6 relative flex h-8 items-center gap-1"
@@ -150,7 +153,7 @@
               <span>NSSPE</span><span>無震源參數推算</span>
             </div>
           </div>
-          <div class="mt-1 flex justify-center gap-2 text-xs">
+          <div class="mt-1 flex justify-end gap-2 text-xs">
             <span class="font-bold">2024/06/26 00:00:00</span>
             <span>發震</span>
           </div>
@@ -158,7 +161,7 @@
       </div>
 
       <div
-        class="cancel-box absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-lg bg-black bg-opacity-60 text-white backdrop-blur-sm"
+        class="cancel-box absolute left-0 top-0 hidden h-full w-full flex-col items-center justify-center rounded-lg bg-[rgba(0,0,0,0.4)] bg-opacity-60 text-white backdrop-blur-sm"
       >
         <div class="flex w-20 justify-between text-3xl font-extrabold">
           <span>取</span><span>消</span>
@@ -169,30 +172,80 @@
   </div>
 
   <div
-    class="absolute bottom-0 right-0 z-[1001] m-2 flex h-[calc(100vh-195px)] w-[calc(20vw+16px)] min-w-[300px] max-w-[320px] flex-col gap-8"
+    class="absolute bottom-0 right-0 z-[1001] m-2 flex h-[calc(100vh-145px)] w-[calc(20vw+16px)] min-w-[300px] max-w-[320px] flex-col gap-8"
   >
-    <div class="realtime-box z-10 flex min-h-0 flex-1 flex-col text-white">
+    <!--即時震度-->
+    <div class="relative top-6 z-10 flex min-h-0 flex-1 flex-col text-white">
       <div
-        class="realtime-container flex min-h-0 flex-col gap-2 rounded-lg bg-gray-800 bg-opacity-75 p-3"
+        class="flex min-h-0 flex-col gap-1 rounded-lg bg-[rgba(56,56,56,0.73)] bg-opacity-75 p-2"
       >
-        <div class="realtime-header text-lg font-bold">即時震度</div>
+        <div class="text-lg font-bold">即時震度</div>
         <div
-          class="realtime-list flex min-h-0 flex-col gap-2 overflow-y-hidden rounded-xl"
-          id="realtime-list"
+          class="realtime-list flex min-h-0 flex-col gap-1 overflow-y-scroll rounded-xl"
         >
-          <div class="realtime-item">
-            <div class="realtime-intensity intensity-6">5⁺</div>
-            <div class="realtime-location">花蓮縣花蓮市</div>
+          <div class="rt-item">
+            <div class="rt-int intensity-6">5⁺</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
           </div>
-          <div class="realtime-item">
-            <div class="realtime-intensity intensity-5">5⁻</div>
-            <div class="realtime-location">花蓮縣花蓮市</div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
+          </div>
+          <div class="rt-item">
+            <div class="rt-int intensity-5">5⁻</div>
+            <div class="rt-loc">花蓮縣花蓮市</div>
           </div>
         </div>
       </div>
     </div>
+
+    <!--所在地預估-->
     <div
-      class="z-10 flex h-20 gap-0.5 rounded-lg bg-gray-800 bg-opacity-75 p-2 pl-3 text-white"
+      class="z-10 flex h-20 gap-0.5 rounded-lg bg-[rgba(56,56,56,0.73)] bg-opacity-75 p-2 pl-3 text-white"
     >
       <div
         class="text-center text-xs opacity-60"
@@ -200,9 +253,11 @@
       >
         所在地預估
       </div>
-      <div class="relative flex flex-1 gap-2 rounded-xl bg-gray-600">
+      <div
+        class="relative flex flex-1 gap-2 rounded-xl bg-[rgba(80,80,80,0.78)]"
+      >
         <div
-          class="leading-11 intensity-8 flex h-16 w-16 items-center justify-center rounded-lg p-2 text-center text-4xl font-extrabold shadow-md"
+          class="leading-11 intensity-8 flex h-16 w-16 items-center justify-center rounded-xl p-2 text-center text-4xl font-extrabold shadow-md"
         >
           6⁺
         </div>
@@ -225,53 +280,31 @@
     </div>
   </div>
 
-  <div id="map" ref="mapElement" class="h-dvh w-full"></div>
+  <MapIndex />
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
-import { getStationInfo, useTimeUpdate } from "../ts/rts";
-import { initializeMap } from "../ts/map";
+<script setup lang="ts">
+import MapIndex from "../components/MapIndex.vue";
+import utils from "../ts/utils";
+import { ref } from "vue";
+const maxPga = ref("");
+const realtimeData = ref([]);
 
-export default defineComponent({
-  name: "MapAndIndex",
-
-  setup() {
-    const mapElement = ref<HTMLElement | null>(null);
-    const maxPga = ref("");
-    const realtimeData = ref([]);
-
-    const fetchStationData = async () => {
-      try {
-        const data = await getStationInfo();
-      } catch (error) {
-        console.error("Failed to fetch station data:", error);
-      }
-    };
-
-    const timeUpdate = useTimeUpdate();
-
-    onMounted(() => {
-      if (mapElement.value) {
-        initializeMap(mapElement.value);
-      }
-      fetchStationData();
-      setInterval(fetchStationData, 300_000);
-    });
-
-    return {
-      mapElement,
-      maxPga,
-      realtimeData,
-      timeUpdate,
-    };
-  },
-});
+const timeUpdate = utils.useTimeUpdate();
+// export {
+//   data() {
+//     return {
+//       /* refs */
+//     }
+//   },
+//   setup() {
+//     /* setup function */
+//   },
+//   mount() {
+//     /* on mounted lifecycle hook */
+//   }
+// }
 </script>
-
-<!-- <script lang="ts" setup>
-import setting from "./setting.vue";
-</script> -->
 
 <style lang="css">
 @import "../css/intensity.css";
