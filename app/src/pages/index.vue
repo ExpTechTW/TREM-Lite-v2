@@ -52,10 +52,16 @@
     </div>
   </div>
 
+  <!--時間-->
   <div
-    class="connect-wrapper text-red pointer-events-none absolute bottom-0 left-0 z-[1001] m-1 ml-1 flex items-center rounded-lg border-2 border-black border-opacity-10 bg-black bg-opacity-75 p-px"
+    :class="
+      timeUpdate.docColor.value +
+      ' connect-wrapper pointer-events-none absolute bottom-0 left-0 z-[1001] m-1 ml-1 flex items-center rounded-lg border-2 border-black border-opacity-10 bg-black bg-opacity-75 p-px'
+    "
   >
-    <div class="time text-red z-10 text-base">0000-01-01 00:00:00</div>
+    <div class="time text-red z-10 text-base font-bold">
+      {{ timeUpdate.docTime.value }}
+    </div>
     <div class="icon text-red z-10">
       <svg
         id="connect"
@@ -174,15 +180,14 @@
           class="realtime-list flex min-h-0 flex-col gap-2 overflow-y-hidden rounded-xl"
           id="realtime-list"
         >
-          <li v-for="(item, index) in realtimeData" :key="index">{{ item }}</li>
-          <!--div class="realtime-item">
+          <div class="realtime-item">
             <div class="realtime-intensity intensity-6">5⁺</div>
             <div class="realtime-location">花蓮縣花蓮市</div>
           </div>
           <div class="realtime-item">
             <div class="realtime-intensity intensity-5">5⁻</div>
             <div class="realtime-location">花蓮縣花蓮市</div>
-          </div-->
+          </div>
         </div>
       </div>
     </div>
@@ -220,12 +225,12 @@
     </div>
   </div>
 
-  <div id="map" ref="mapElement" class="h-dvh" style="width: 100%"></div>
+  <div id="map" ref="mapElement" class="h-dvh w-full"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import { getStationInfo } from "../ts/rts";
+import { getStationInfo, useTimeUpdate } from "../ts/rts";
 import { initializeMap } from "../ts/map";
 
 export default defineComponent({
@@ -236,22 +241,15 @@ export default defineComponent({
     const maxPga = ref("");
     const realtimeData = ref([]);
 
-    const logger = {
-      info(message: string) {
-        console.log(message);
-      },
-      error(message: string) {
-        console.error(message);
-      },
-    };
-
     const fetchStationData = async () => {
       try {
-        const data = await getStationInfo(logger);
+        const data = await getStationInfo();
       } catch (error) {
         console.error("Failed to fetch station data:", error);
       }
     };
+
+    const timeUpdate = useTimeUpdate();
 
     onMounted(() => {
       if (mapElement.value) {
@@ -265,10 +263,15 @@ export default defineComponent({
       mapElement,
       maxPga,
       realtimeData,
+      timeUpdate,
     };
   },
 });
 </script>
+
+<!-- <script lang="ts" setup>
+import setting from "./setting.vue";
+</script> -->
 
 <style lang="css">
 @import "../css/intensity.css";
