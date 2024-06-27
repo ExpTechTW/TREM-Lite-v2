@@ -284,26 +284,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 import MapIndex from "../components/MapIndex.vue";
 import utils from "../ts/utils";
-import { ref } from "vue";
+import { startEewInterval } from "../ts/eew";
+
 const maxPga = ref("");
 const realtimeData = ref([]);
-
 const timeUpdate = utils.useTimeUpdate();
-// export {
-//   data() {
-//     return {
-//       /* refs */
-//     }
-//   },
-//   setup() {
-//     /* setup function */
-//   },
-//   mount() {
-//     /* on mounted lifecycle hook */
-//   }
-// }
+
+onMounted(() => {
+  startEewInterval();
+});
 </script>
 
 <style lang="css">

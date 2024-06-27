@@ -116,10 +116,39 @@ export const useMapStore = defineStore("map", {
         },
         status: {
           eew: 0,
+          intensity: 0,
+          rts: 0,
+        },
+      },
+      intensity_geojson: null,
+      replay_list: null,
+      station_icon: null,
+      BOX_GEOJSON: {
+        features: {
+          geometry: null,
         },
       },
       TIME_TABLE: {},
       TIME_TABLE_OBJECT: [],
+      intensity_list: ["0", "1", "2", "3", "4", "5⁻", "5⁺", "6⁻", "6⁺", "7"],
+      last_get_data_time: 0,
+      time_offset: 0,
+      replay: 0,
+      station_info: null,
+      audio: {
+        shindo: -1,
+        pga: -1,
+        status: {
+          shindo: 0,
+          pga: 0,
+        },
+        count: {
+          pga_1: 0,
+          pga_2: 0,
+          shindo_1: 0,
+          shindo_2: 0,
+        },
+      },
     };
   },
 });
@@ -137,8 +166,38 @@ interface MapState {
     };
     status: {
       eew: number;
+      intensity: number;
+      rts: number;
     };
   };
+  REGION: Record<string, any>;
+  intensity_geojson: L.GeoJSON | null;
   TIME_TABLE: Record<string, any>;
   TIME_TABLE_OBJECT: Array<number>;
+  intensity_list: Array<string>;
+  replay_list: Array<string>;
+  station_icon: Array<string>;
+  BOX_GEOJSON: {
+    features: {
+      geometry: Array<string>;
+    };
+  };
+  last_get_data_time: number;
+  time_offset: number;
+  replay: number;
+  station_info: string;
+  audio: {
+    shindo: number;
+    pga: number;
+    status: {
+      shindo: number;
+      pga: number;
+    };
+    count: {
+      pga_1: number;
+      pga_2: number;
+      shindo_1: number;
+      shindo_2: number;
+    };
+  };
 }

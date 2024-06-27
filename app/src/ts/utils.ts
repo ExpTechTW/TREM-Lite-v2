@@ -1,14 +1,20 @@
 import { ref, onMounted, onUnmounted } from "vue";
-import { variable, constant } from "../ts/constant";
 import crypto from "crypto";
-const intensity_list = ["0", "1", "2", "3", "4", "5⁻", "5⁺", "6⁻", "6⁺", "7"];
+import { useMapStore } from "../ts/store";
 
 const utils = {
   url: (t: string) => {
     return `https://${t}-${Math.ceil(Math.random() * 2)}.exptech.dev/api/`;
   },
+  ntp: async () => {
+    const res = await fetch(
+      `https://lb-${Math.ceil(Math.random() * 4)}.exptech.com.tw/ntp`,
+    );
+    const data = await res.text();
+    useMapStore().time_offset = Number(data) - Date.now();
+  },
   int_to_intensity: (int: string | number) => {
-    return typeof int === "number" ? intensity_list[int] : "0";
+    return typeof int === "number" ? useMapStore().intensity_list[int] : "0";
   },
   parseJSON: (jsonString: string) => {
     try {
@@ -60,9 +66,9 @@ const utils = {
     const json: any = {};
     let eew_max_i = 0;
 
-    for (const city of Object.keys(constant.REGION)) {
-      for (const town of Object.keys(constant.REGION[city])) {
-        const info = constant.REGION[city][town];
+    for (const city of Object.keys(useMapStore().REGION)) {
+      for (const town of Object.keys(useMapStore().REGION[city])) {
+        const info = useMapStore().REGION[city][town];
         const dist_surface = utils.distance(lat, lon)(info.lat, info.lon);
         const dist = Math.sqrt(utils.pow(dist_surface) + utils.pow(depth));
         const pga =
@@ -189,10 +195,10 @@ const utils = {
     const updateTime = () => {
       const _now = utils.now();
       let colorClass = "text-white";
-      if (variable.replay) {
-        docTime.value = utils.formatTime(variable.replay);
+      if (useMapStore().replay) {
+        docTime.value = utils.formatTime(useMapStore().replay);
         colorClass = "text-yellow-300";
-      } else if (_now - variable.last_get_data_time > 5000) {
+      } else if (_now - useMapStore().last_get_data_time > 5000) {
         docTime.value = utils.formatTime(_now);
         colorClass = "text-red-600";
       } else {

@@ -57,3 +57,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.hidden {
+  visibility: hidden;
+}
