@@ -9,6 +9,15 @@
   --background-variant-hsl: 0deg 0% 16%;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
 body {
   user-select: none;
   margin: 0;
@@ -42,4 +51,13 @@ body {
     -2px -2px black,
     -2px 2px black,
     2px -2px black;
+}
+
+.realtime-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden {
+  visibility: hidden;
 }
