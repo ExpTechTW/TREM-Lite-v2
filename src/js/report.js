@@ -75,7 +75,7 @@ async function report(t, retryCount = 0) {
 
     const IntWrapper = CreatEle("", "report-list-item-int-wrapper");
     const Int = CreatEle(
-      s ? s.max : FirstItem.int,
+      intensity_list[s ? s.max : FirstItem.int],
       `report-list-item-int intensity-${s ? s.max : FirstItem.int}`
     );
     const IntTitle = CreatEle("觀測最大震度", "report-list-item-int-title");
@@ -139,7 +139,7 @@ async function report(t, retryCount = 0) {
         "data-report-id": item.id,
       });
       const IntItem = CreatEle(
-        item.int,
+        intensity_list[item.int],
         `report-list-item-int intensity-${item.int}`
       );
       const InfoItem = CreatEle("", "report-list-item-info");
