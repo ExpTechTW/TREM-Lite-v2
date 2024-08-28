@@ -85,8 +85,12 @@ async function ntp() {
   const res = await fetchData(
     `https://lb-${Math.ceil(Math.random() * 4)}.exptech.com.tw/ntp`
   );
-  const data = await res.text();
-  variable.time_offset = Number(data) - Date.now();
+  if (res.status === 200) {
+    const data = await res.text();
+    variable.time_offset = Number(data) - Date.now();
+  } else {
+    setTimeout(ntp, 5000);
+  }
 }
 ntp();
 
