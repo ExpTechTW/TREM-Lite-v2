@@ -1,6 +1,6 @@
 {
   "name": "trem_lite",
-  "version": "2.0.0-pre.17",
+  "version": "2.0.0-pre.18",
   "description": "Taiwan Real-time Earthquake Monitoring",
   "main": "main.js",
   "author": "ExpTechTW <ExpTech.tw@gmail.com>",
