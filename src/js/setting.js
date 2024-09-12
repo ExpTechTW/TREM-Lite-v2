@@ -461,7 +461,7 @@ const elements = {
   FormEmail: $("#email"),
   FormPassword: $("#password"),
   LoginMsg: $(".login_msg"),
-  url: "https://api-1.exptech.com.tw/api/v3/et/",
+  url: "https://api-1.exptech.dev/api/v3/et/",
 };
 
 function toggleForms(isLogin) {
@@ -538,10 +538,10 @@ elements.LogoutBtn.onclick = () => logout(config.setting["user-key"]);
 elements.FormLogin.onclick = async () =>
   login(elements.FormEmail.value, elements.FormPassword.value);
 Forget.onclick = () =>
-  ipcRenderer.send("openUrl", "https://exptech.com.tw/forgot");
+  ipcRenderer.send("openUrl", "https://exptech.dev/forgot");
 
 BuyVip.onclick = () =>
-  ipcRenderer.send("openUrl", "https://exptech.com.tw/pricing");
+  ipcRenderer.send("openUrl", "https://exptech.dev/pricing");
 
 async function getUserInfo(token, retryCount = 0) {
   try {

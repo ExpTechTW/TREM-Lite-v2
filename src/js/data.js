@@ -83,7 +83,7 @@ async function realtime_eew() {
 
 async function ntp() {
   const res = await fetchData(
-    `https://lb-${Math.ceil(Math.random() * 4)}.exptech.com.tw/ntp`
+    `https://lb-${Math.ceil(Math.random() * 4)}.exptech.dev/ntp`
   );
   if (res.status === 200) {
     const data = await res.text();
@@ -131,7 +131,7 @@ async function fetchReplay(url, controller, retries = 3) {
 
 async function replay_rts(ts, controller) {
   const ans_rts = await fetchReplay(
-    `https://api-2.exptech.com.tw/api/v1/trem/rts/${ts}`,
+    `https://api-2.exptech.dev/api/v1/trem/rts/${ts}`,
     controller
   );
   if (!rts_replay_time) return;
@@ -147,7 +147,7 @@ async function replay_rts(ts, controller) {
 
 async function replay_eew(ts, rt, controller) {
   const ans_eew = await fetchReplay(
-    `https://api-2.exptech.com.tw/api/v1/eq/eew/${ts}`,
+    `https://api-2.exptech.dev/api/v1/eq/eew/${ts}`,
     controller
   );
   if (!rts_replay_time) return;
